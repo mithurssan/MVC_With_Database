@@ -26,6 +26,17 @@ class Wrong {
             throw new Error("Wrong already exists.");
         }
     }
+
+    async destroy() {
+        const id = this.id;
+        const exists = await db.query("SELECT * FROM wrongs WHERE wrong_id = $1", [id]);
+        if (exists.rows[0]) {
+            const data = await db.query("DELETE FROM wrongs WHERE wrong_id = $1 RETURNING *", [id]);
+            return new Wrong(data.rows[0]);
+        } else {
+            throw new Error("Wrong does not exist.")
+        }
+    }
 }
 
 module.exports = Wrong;

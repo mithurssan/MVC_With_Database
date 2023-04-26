@@ -22,4 +22,15 @@ const create = async (req, res) => {
     }
 }
 
-module.exports = { show, create };
+const destroy = async (req, res) => {
+    try {
+        const wrongId = parseInt(req.params.id);
+        const wrong = await Wrong.findById(wrongId);
+        await wrong.destroy();
+        res.sendStatus(204);
+    } catch (error) {
+        res.status(404).send({ error: error.message });
+    }
+}
+
+module.exports = { show, create, destroy };
