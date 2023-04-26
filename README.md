@@ -13,5 +13,5 @@
 
 - POST
    - /people: Add a new person to the database
-
+   - /wrongs: Add a new wrong to the database
 
