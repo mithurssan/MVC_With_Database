@@ -37,6 +37,17 @@ class Wrong {
             throw new Error("Wrong does not exist.")
         }
     }
+
+    async update(description) {
+        const id = this.id;
+        const exists = await db.query("SELECT * FROM wrongs WHERE wrong_id = $1", [id]);
+        if (exists.rows[0]) {
+            const data = await db.query("UPDATE wrongs SET description = $2 WHERE wrong_id = $1 RETURNING *", [id, description]);
+            return new Wrong(data.rows[0]);
+        } else {
+            throw new Error("Wrong does not exist.")
+        }
+    }
 }
 
 module.exports = Wrong;

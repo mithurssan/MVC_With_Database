@@ -18,4 +18,6 @@
 - DELETE
    - `/wrongs/:id` - Remove a wrong from the database
 
+- PATCH
+   - `/wrongs/:id` - Update a wrong, changing its description
 

@@ -33,4 +33,16 @@ const destroy = async (req, res) => {
     }
 }
 
-module.exports = { show, create, destroy };
+const update = async (req, res) => {
+    try {
+        const wrongId = parseInt(req.params.id);
+        const wrongDesc = req.body.description;
+        const wrong = await Wrong.findById(wrongId);
+        const updatedWrong = await wrong.update(wrongDesc);
+        res.status(200).send(updatedWrong);
+    } catch (error) {
+        res.status(404).send({ error: error.message });
+    }
+}
+
+module.exports = { show, create, destroy, update };
