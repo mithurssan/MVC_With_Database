@@ -26,4 +26,6 @@ CREATE TABLE wrongs (
 INSERT INTO wrongs
     (perpetrator_id, victim_id, description)
 VALUES
-    (3, 2, 'Ate his pet chicken.');
+    (3, 2, 'Ate his pet chicken.'),
+    (1, 4, 'Egged house.'),
+    (3, 1, 'Stepped on dog''s tail.');

@@ -3,9 +3,14 @@ const peopleController = require("../controllers/people");
 
 const router = Router();
 
-router.get("/", peopleController.index);
-router.get("/:id", peopleController.show);
-router.post("/", peopleController.create);
+router
+    .route("/")
+    .get(peopleController.index)
+    .post(peopleController.create);
+
+router
+    .route("/:id")
+    .get(peopleController.show);
 
 module.exports = router;
 

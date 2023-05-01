@@ -1,6 +1,8 @@
 const fs = require("fs");
+const path = require("path");
 
-const sql = fs.readFileSync(__dirname + "/setup.sql").toString();
+const filePath = path.join(__dirname, "setup.sql");
+const sql = fs.readFileSync(filePath).toString();
 
 const db = require("./db");
 
