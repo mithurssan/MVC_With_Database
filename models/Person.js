@@ -29,6 +29,19 @@ class Person {
       throw new Error("Name already exists.")
     }
   }
+
+  async destroy() {
+    const id = this.id;
+    const exists = await db.query("SELECT * FROM people WHERE person_id = $1", [id]);
+    if (exists.rows[0]) {
+      await db.query("DELETE FROM wrongs WHERE perpetrator_id = $1 RETURNING *", [id]);
+      await db.query("DELETE FROM wrongs WHERE victim_id = $1 RETURNING *", [id]);
+      const data = await db.query("DELETE FROM people WHERE person_id = $1 RETURNING *", [id]);
+      return new Person(data.rows[0]);
+    } else {
+      throw new Error("Person does not exist.")
+    }
+  }
 }
 
 module.exports = Person;

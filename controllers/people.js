@@ -25,6 +25,17 @@ const create = async (req, res) => {
     }
 }
 
+const destroy = async (req, res) => {
+    try {
+        const personId = parseInt(req.params.id);
+        const person = await Person.findById(personId);
+        await person.destroy();
+        res.sendStatus(204);
+    } catch (error) {
+        res.status(404).send({ error: error.message })
+    }
+}
 
-module.exports = { show, index, create };
+
+module.exports = { show, index, create, destroy };
 

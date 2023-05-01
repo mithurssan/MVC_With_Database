@@ -20,6 +20,7 @@
 
 - DELETE
    - `/wrongs/:id` - Remove a wrong from the database
+   - `/people/:id` - Remove a person from the database
 
 - PATCH
    - `/wrongs/:id` - Update a wrong, changing its description

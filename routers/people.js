@@ -10,7 +10,8 @@ router
 
 router
     .route("/:id")
-    .get(peopleController.show);
+    .get(peopleController.show)
+    .delete(peopleController.destroy);
 
 module.exports = router;
 
