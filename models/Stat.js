@@ -8,12 +8,20 @@ class Stat {
 
     static async all() {
         const data = await db.query("SELECT COUNT(*) FROM wrongs");
-        return new Stat({ total_wrongs: data.rows[0].count });
+        if (data.rows[0].count) {
+            return new Stat({ total_wrongs: data.rows[0].count });
+        } else {
+            throw new Error("Stats not found.")
+        }
     }
 
     static async findById(id) {
         const data = await db.query("SELECT COUNT(*) FROM wrongs WHERE perpetrator_id = $1", [id]);
-        return new Stat({ total_wrongs_commited: data.rows[0].count });
+        if (data.rows[0].count) {
+            return new Stat({ total_wrongs_commited: data.rows[0].count });
+        } else {
+            throw new Error("Stats not found.")
+        }
     }
 }
 
