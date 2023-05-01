@@ -17,7 +17,15 @@ const show = async (req, res) => {
     } catch (err) {
         res.status(404).send({ error: err.message });
     }
-
 }
 
-module.exports = { index, show };
+const wrongsSum = async (req, res) => {
+    try {
+        const statSum = await Stat.wrongsSum();
+        res.send(statSum);
+    } catch (err) {
+        res.status(404).send({ error: err.message });
+    }
+}
+
+module.exports = { index, show, wrongsSum };

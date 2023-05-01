@@ -8,8 +8,14 @@ router
     .get(statsController.index);
 
 router
+    .route("/people")
+    .get(statsController.wrongsSum);
+
+router
     .route("/:id")
     .get(statsController.show);
+
+
 
 module.exports = router;
 

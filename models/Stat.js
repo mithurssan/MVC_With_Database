@@ -2,6 +2,8 @@ const db = require("../database/db");
 
 class Stat {
     constructor(data) {
+        this.person_id = data.person_id;
+        this.person_name = data.person_name;
         this.total_wrongs = data.total_wrongs;
         this.total_wrongs_commited = data.total_wrongs_commited;
     }
@@ -21,6 +23,20 @@ class Stat {
             return new Stat({ total_wrongs_commited: data.rows[0].count });
         } else {
             throw new Error("Stats not found.")
+        }
+    }
+
+    static async wrongsSum() {
+        const data = await db.query("SELECT * FROM people");
+        if (data.rows) {
+            const stats = [];
+            for (const person of data.rows) {
+                const total_wrongs_commited = (await Stat.findById(person.person_id)).total_wrongs_commited;
+                stats.push(new Stat({ ...person, total_wrongs_commited }));
+            }
+            return stats;
+        } else {
+            throw new Error("Summary not found.")
         }
     }
 }

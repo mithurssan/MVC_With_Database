@@ -12,6 +12,7 @@
    - `/wrongs/:id` - Get the details of a specific wrong
    - `/stats` - Return a summary of all the wrongs in the database
    - `/stats/:id` - Return a summary of all the wrongs related to a specific person
+   - `/stats/people` - Return a summary of all relevant wrongs for each person
 
 - POST
    - `/people` - Add a new person to the database
